@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ТопТовары - Лучшие находки с AliExpress</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .newsletter {
+            background: white;
+            padding: 40px;
+            margin: -30px auto 40px;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .newsletter h2 {
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .newsletter form {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .newsletter input[type="email"] {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .newsletter button {
+            padding: 15px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .newsletter button:hover {
+            background: #5568d3;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: #f0f0f0;
+        }
+
+        .product-content {
+            padding: 20px;
+        }
+
+        .product-badge {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-bottom: 10px;
+        }
+
+        .product-title {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .product-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            font-size: 1.5em;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .product-price .old-price {
+            font-size: 0.7em;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+
+        .rating {
+            margin-bottom: 15px;
+            color: #ffa500;
+        }
+
+        .buy-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+
+        .buy-button:hover {
+            opacity: 0.9;
+        }
+
+        .features {
+            background: white;
+            padding: 60px 20px;
+            margin-top: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature {
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .newsletter {
+                padding: 30px 20px;
+            }
+
+            .newsletter form {
+                flex-direction: column;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .success-message {
+            display: none;
+            background: #4caf50;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🛍️ ТопТовары</h1>
+        <p>Находим лучшие товары на AliExpress, чтобы вы экономили время и деньги</p>
+    </div>
+
+    <div class="container">
+        <div class="newsletter">
+            <h2>📬 Получайте лучшие предложения первыми!</h2>
+            <p>Подпишитесь на рассылку и узнавайте о скидках до 70% раньше других</p>
+            <form id="subscribeForm">
+                <input type="email" placeholder="Ваш email" required>
+                <button type="submit">Подписаться</button>
+            </form>
+            <div class="success-message" id="successMessage">
+                ✅ Спасибо! Вы подписались на рассылку
+            </div>
+        </div>
+
+        <h2 style="text-align: center; margin-bottom: 30px; font-size: 2em;">🔥 Топ товаров этой недели</h2>
+
+        <div class="products-grid">
+            <!-- Товар 1 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/400x300/667eea/ffffff?text=Беспроводные+наушники" alt="Наушники" class="product-image">
+                <div class="product-content">
+                    <span class="product-badge">ХИТ ПРОДАЖ</span>
+                    <h3 class="product-title">Беспроводные наушники TWS</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ 4.8 (2,341 отзыв)</div>
+                    <p class="product-description">
+                        Качественный звук, активное шумоподавление, до 30 часов работы. Идеальны для спорта и работы.
+                    </p>
+                    <div class="product-price">
+                        $29.99 <span class="old-price">$79.99</span>
+                    </div>
+                    <a href="#" class="buy-button" onclick="trackClick('product1')">🛒 Купить на AliExpress</a>
+                </div>
+            </div>
+
+            <!-- Товар 2 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/400x300/764ba2/ffffff?text=Умные+часы" alt="Умные часы" class="product-image">
+                <div class="product-content">
+                    <span class="product-badge">НОВИНКА</span>
+                    <h3 class="product-title">Смарт-часы с AMOLED дисплеем</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ 4.7 (1,856 отзывов)</div>
+                    <p class="product-description">
+                        Мониторинг здоровья, 100+ спортивных режимов, водонепроницаемые. Батарея до 14 дней!
+                    </p>
+                    <div class="product-price">
+                        $45.99 <span class="old-price">$129.99</span>
+                    </div>
+                    <a href="#" class="buy-button" onclick="trackClick('product2')">🛒 Купить на AliExpress</a>
+                </div>
+            </div>
+
+            <!-- Товар 3 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/400x300/ff6b6b/ffffff?text=Портативная+колонка" alt="Колонка" class="product-image">
+                <div class="product-content">
+                    <span class="product-badge">СКИДКА 65%</span>
+                    <h3 class="product-title">Портативная Bluetooth колонка</h3>
+                    <div class="rating">⭐⭐⭐⭐⭐ 4.9 (3,127 отзывов)</div>
+                    <p class="product-description">
+                        Мощный звук 360°, защита IPX7, работа до 24 часов. Отлично подходит для пикников и путешествий.
+                    </p>
+                    <div class="product-price">
+                        $34.99 <span class="old-price">$99.99</span>
+                    </div>
+                    <a href="#" class="buy-button" onclick="trackClick('product3')">🛒 Купить на AliExpress</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="features">
+        <div class="features-grid">
+            <div class="feature">
+                <div class="feature-icon">✅</div>
+                <h3>Проверенные товары</h3>
+                <p>Каждый товар тестируется нашей командой перед публикацией</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💰</div>
+                <h3>Лучшие цены</h3>
+                <p>Находим самые выгодные предложения и скидки специально для вас</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3>Быстрая доставка</h3>
+                <p>Рекомендуем продавцов с надёжной и быстрой доставкой</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2026 ТопТовары. Лучшие обзоры товаров с AliExpress</p>
+        <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.7;">
+            Партнёрские ссылки. Мы получаем комиссию с покупок без доп. платы для вас.
+        </p>
+    </div>
+
+    <script>
+        // Обработка формы подписки
+        document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = this.querySelector('input[type="email"]').value;
+            
+            // Здесь можно добавить отправку на сервер или сервис email-рассылок
+            console.log('Подписка:', email);
+            
+            // Показываем сообщение об успехе
+            document.getElementById('successMessage').style.display = 'block';
+            this.reset();
+            
+            // Скрываем сообщение через 5 секунд
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+        });
+
+        // Трекинг кликов по партнёрским ссылкам
+        function trackClick(productId) {
+            console.log('Клик по товару:', productId);
+            // Здесь можно добавить Google Analytics или другую аналитику
+            
+            // ВАЖНО: Замените '#' на реальные партнёрские ссылки AliExpress
+            alert('Замените ссылку на вашу партнёрскую ссылку AliExpress для товара: ' + productId);
+            return false;
+        }
+    </script>
+</body>
+</html>
