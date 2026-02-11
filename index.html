@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ТопТовары - Крупнейший каталог товаров с AliExpress</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+
+        /* Верхняя панель */
+        .top-bar {
+            background: #2c3e50;
+            color: white;
+            padding: 8px 0;
+            font-size: 13px;
+        }
+
+        .top-bar-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar-left {
+            display: flex;
+            gap: 20px;
+        }
+
+        .top-bar-right {
+            display: flex;
+            gap: 15px;
+        }
+
+        .top-bar a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+
+        .top-bar a:hover {
+            opacity: 1;
+        }
+
+        /* Главный хедер */
+        .main-header {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e74c3c;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        /* Поиск */
+        .search-container {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .search-box {
+            display: flex;
+            border: 2px solid #e74c3c;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .search-box button {
+            padding: 12px 30px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-box button:hover {
+            background: #c0392b;
+        }
+
+        /* Навигация */
+        .main-nav {
+            background: #34495e;
+            border-bottom: 3px solid #e74c3c;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 5px;
+        }
+
+        .nav-item {
+            position: relative;
+            padding: 15px 20px;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-item:hover {
+            background: #2c3e50;
+        }
+
+        .nav-item.active {
+            background: #e74c3c;
+        }
+
+        /* Мега меню */
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 30px;
+            min-width: 800px;
+            display: none;
+            z-index: 999;
+        }
+
+        .nav-item:hover .mega-menu {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .mega-menu-column h4 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+            font-size: 16px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+
+        .mega-menu-column ul {
+            list-style: none;
+        }
+
+        .mega-menu-column li {
+            padding: 8px 0;
+        }
+
+        .mega-menu-column a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .mega-menu-column a:hover {
+            color: #e74c3c;
+        }
+
+        /* Главный баннер */
+        .hero-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-banner h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero-banner p {
+            font-size: 22px;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* Категории плитка */
+        .categories-grid-section {
+            max-width: 1400px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .category-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-color: #e74c3c;
+        }
+
+        .category-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .category-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .category-count {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        /* Промо баннеры */
+        .promo-banners {
+            max-width: 1400px;
+            margin: 50px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .promo-banner {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-banner.blue {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .promo-banner.green {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .promo-banner h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .promo-banner p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        .promo-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: white;
+            color: #e74c3c;
+            border-radius: 25px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .promo-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Товары */
+        .products-section {
+            max-width: 1400px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .filter-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .filter-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .filter-item label {
+            font-size: 13px;
+            color: #7f8c8d;
+            font-weight: 600;
+        }
+
+        .filter-item select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            background: #f8f9fa;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-badge {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            height: 44px;
+            overflow: hidden;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .stars {
+            color: #f39c12;
+        }
+
+        .reviews {
+            color: #7f8c8d;
+        }
+
+        .product-price {
+            font-size: 26px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 12px;
+        }
+
+        .product-price .old-price {
+            font-size: 16px;
+            color: #95a5a6;
+            text-decoration: line-through;
+            margin-left: 10px;
+            font-weight: normal;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid #ecf0f1;
+            font-size: 13px;
+            color: #7f8c8d;
+        }
+
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: #e74c3c;
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+
+        .buy-btn:hover {
+            background: #c0392b;
+        }
+
+        /* Футер */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 50px 20px 20px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: #ecf0f1;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            padding: 8px 0;
+        }
+
+        .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #34495e;
+            color: #95a5a6;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+
+            .search-container {
+                order: 3;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .nav-content {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            .mega-menu {
+                min-width: 100vw;
+                grid-template-columns: 1fr;
+            }
+
+            .hero-banner h1 {
+                font-size: 32px;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Скрытие категорий */
+        .category-products {
+            display: none;
+        }
+
+        .category-products.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Верхняя панель -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div class="top-bar-left">
+                <span>🇷🇺 Русский язык</span>
+                <span>📍 Доставка в Россию</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="#">Помощь</a>
+                <a href="#">Отслеживание заказа</a>
+                <a href="#">Войти</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Главный хедер -->
+    <header class="main-header">
+        <div class="header-content">
+            <a href="#" class="logo">🛍️ ТопТовары</a>
+            
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" placeholder="Поиск среди 10 000+ товаров...">
+                    <button>🔍 Поиск</button>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <a href="#" style="text-decoration: none; color: #2c3e50;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 24px;">❤️</div>
+                        <div style="font-size: 12px;">Избранное</div>
+                    </div>
+                </a>
+                <a href="#" style="text-decoration: none; color: #2c3e50;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 24px;">🛒</div>
+                        <div style="font-size: 12px;">Корзина</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Навигация -->
+    <nav class="main-nav">
+        <div class="nav-content">
+            <div class="nav-item active" onclick="showCategory('all')">
+                🏠 Все категории
+            </div>
+            <div class="nav-item" onclick="showCategory('electronics')">
+                📱 Электроника
+                <div class="mega-menu">
+                    <div class="mega-menu-column">
+                        <h4>Аудио</h4>
+                        <ul>
+                            <li><a href="#">Наушники TWS</a></li>
+                            <li><a href="#">Проводные наушники</a></li>
+                            <li><a href="#">Колонки Bluetooth</a></li>
+                            <li><a href="#">Наушники накладные</a></li>
+                        </ul>
+                    </div>
+                    <div class="mega-menu-column">
+                        <h4>Носимые устройства</h4>
+                        <ul>
+                            <li><a href="#">Умные часы</a></li>
+                            <li><a href="#">Фитнес-браслеты</a></li>
+                            <li><a href="#">Смарт-кольца</a></li>
+                        </ul>
+                    </div>
+                    <div class="mega-menu-column">
+                        <h4>Зарядные устройства</h4>
+                        <ul>
+                            <li><a href="#">Power Bank</a></li>
+                            <li><a href="#">Беспроводные зарядки</a></li>
+                            <li><a href="#">Быстрые зарядки</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-item" onclick="showCategory('phones')">
+                📞 Телефоны
+            </div>
+            <div class="nav-item" onclick="showCategory('computers')">
+                💻 Компьютеры
+            </div>
+            <div class="nav-item" onclick="showCategory('appliances')">
+                🏠 Бытовая техника
+            </div>
+            <div class="nav-item">
+                🔥 Акции
+            </div>
+        </div>
+    </nav>
+
+    <!-- Главный баннер -->
+    <div class="hero-banner">
+        <div class="hero-content">
+            <h1>Лучшие товары с AliExpress в одном месте</h1>
+            <p>Только проверенные продавцы • Быстрая доставка • Гарантия качества</p>
+            
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">10 000+</span>
+                    <span class="stat-label">Товаров</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50 000+</span>
+                    <span class="stat-label">Довольных клиентов</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4.9★</span>
+                    <span class="stat-label">Средний рейтинг</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Категории плитка -->
+    <div class="categories-grid-section">
+        <h2 class="section-title">Популярные категории</h2>
+        <div class="categories-grid">
+            <div class="category-card" onclick="showCategory('electronics')">
+                <div class="category-icon">📱</div>
+                <div class="category-name">Электроника</div>
+                <div class="category-count">2,450+ товаров</div>
+            </div>
+            <div class="category-card" onclick="showCategory('phones')">
+                <div class="category-icon">📞</div>
+                <div class="category-name">Телефоны</div>
+                <div class="category-count">1,380+ товаров</div>
+            </div>
+            <div class="category-card" onclick="showCategory('computers')">
+                <div class="category-icon">💻</div>
+                <div class="category-name">Компьютеры</div>
+                <div class="category-count">890+ товаров</div>
+            </div>
+            <div class="category-card" onclick="showCategory('appliances')">
+                <div class="category-icon">🏠</div>
+                <div class="category-name">Бытовая техника</div>
+                <div class="category-count">1,670+ товаров</div>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">👕</div>
+                <div class="category-name">Одежда</div>
+                <div class="category-count">3,200+ товаров</div>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🎮</div>
+                <div class="category-name">Игры и хобби</div>
+                <div class="category-count">1,450+ товаров</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Промо баннеры -->
+    <div class="promo-banners">
+        <div class="promo-banner">
+            <h3>🔥 Февральская распродажа</h3>
+            <p>Скидки до 70% на электронику</p>
+            <a href="#" class="promo-btn">Смотреть товары</a>
+        </div>
+        <div class="promo-banner blue">
+            <h3>⚡ Быстрая доставка</h3>
+            <p>Доставка от 7 дней по России</p>
+            <a href="#" class="promo-btn">Подробнее</a>
+        </div>
+        <div class="promo-banner green">
+            <h3>💰 Кешбэк 5%</h3>
+            <p>На все покупки для новых клиентов</p>
+            <a href="#" class="promo-btn">Получить</a>
+        </div>
+    </div>
+
+    <!-- Товары -->
+    <div class="products-section">
+        <h2 class="section-title">Рекомендуем для вас</h2>
+        
+        <!-- Фильтры -->
+        <div class="filter-bar">
+            <div class="filter-item">
+                <label>Сортировка</label>
+                <select>
+                    <option>По популярности</option>
+                    <option>Сначала дешёвые</option>
+                    <option>Сначала дорогие</option>
+                    <option>По рейтингу</option>
+                    <option>Новинки</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label>Цена</label>
+                <select>
+                    <option>Все цены</option>
+                    <option>До 5 000 ₽</option>
+                    <option>5 000 - 15 000 ₽</option>
+                    <option>15 000 - 30 000 ₽</option>
+                    <option>От 30 000 ₽</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label>Рейтинг</label>
+                <select>
+                    <option>Все товары</option>
+                    <option>⭐ 4.5+</option>
+                    <option>⭐ 4.7+</option>
+                    <option>⭐ 4.9+</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label>Доставка</label>
+                <select>
+                    <option>Любая</option>
+                    <option>До 7 дней</option>
+                    <option>До 14 дней</option>
+                    <option>Бесплатная</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Все товары -->
+        <div id="all-products" class="category-products active">
+            <div class="products-grid">
+                <!-- Товар 1 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&h=300&fit=crop" alt="Наушники" class="product-image">
+                    <div class="product-info">
+                        <span class="product-badge">ХИТ ПРОДАЖ</span>
+                        <h3 class="product-title">Huawei FreeBuds Pro 4 TWS</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="reviews">4.9 (12.4K)</span>
+                        </div>
+                        <div class="product-price">
+                            13 990 ₽ <span class="old-price">19 990 ₽</span>
+                        </div>
+                        <div class="product-meta">
+                            <span>📦 Доставка 7-14 дней</span>
+                            <span>✓ Гарантия</span>
+                        </div>
+                        <button class="buy-btn">🛒 В корзину</button>
+                    </div>
+                </div>
+
+                <!-- Товар 2 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400&h=300&fit=crop" alt="Умные часы" class="product-image">
+                    <div class="product-info">
+                        <span class="product-badge">-50%</span>
+                        <h3 class="product-title">Xiaomi Redmi Watch 5 Active</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="reviews">4.8 (8.6K)</span>
+                        </div>
+                        <div class="product-price">
+                            3 990 ₽ <span class="old-price">7 990 ₽</span>
+                        </div>
+                        <div class="product-meta">
+                            <span>📦 Доставка 7-14 дней</span>
+                            <span>✓ Гарантия</span>
+                        </div>
+                        <button class="buy-btn">🛒 В корзину</button>
+                    </div>
+                </div>
+
+                <!-- Товар 3 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop" alt="Смартфон" class="product-image">
+                    <div class="product-info">
+                        <span class="product-badge">ФЛАГМАН</span>
+                        <h3 class="product-title">Xiaomi 16 Ultra Global</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="reviews">4.9 (18.5K)</span>
+                        </div>
+                        <div class="product-price">
+                            79 990 ₽ <span class="old-price">99 990 ₽</span>
+                        </div>
+                        <div class="product-meta">
+                            <span>📦 Доставка 10-20 дней</span>
+                            <span>✓ Гарантия</span>
+                        </div>
+                        <button class="buy-btn">🛒 В корзину</button>
+                    </div>
+                </div>
+
+                <!-- Товар 4 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=300&fit=crop" alt="Ноутбук" class="product-image">
+                    <div class="product-info">
+                        <span class="product-badge">ПРЕМИУМ</span>
+                        <h3 class="product-title">CHUWI CoreBook X 14" AMD Ryzen</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="reviews">4.8 (5.4K)</span>
+                        </div>
+                        <div class="product-price">
+                            39 990 ₽ <span class="old-price">54 990 ₽</span>
+                        </div>
+                        <div class="product-meta">
+                            <span>📦 Доставка 14-25 дней</span>
+                            <span>✓ Гарантия</span>
+                        </div>
+                        <button class="buy-btn">🛒 В корзину</button>
+                    </div>
+                </div>
+
+                <!-- Товар 5 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1558317374-067fb5f30001?w=400&h=300&fit=crop" alt="Робот-пылесос" class="product-image">
+                    <div class="product-info">
+                        <span class="product-badge">НОВИНКА</span>
+                        <h3 class="product-title">Xiaomi Robot Vacuum S12</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="reviews">4.9 (22.4K)</span>
+                        </div>
+                        <div class="product-price">
+                            29 990 ₽ <span class="old-price">44 990 ₽</span>
+                        </div>
+                        <div class="product-meta">
+                            <span>📦 Доставка 7-14 дней</span>
+                            <span>✓ Гарантия</span>
+                        </div>
+                        <button class="buy-btn">🛒 В корзину</button>
+                    </div>
+                </div>
+
+                <!-- Товар 6 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=400&h=300&fit=crop" alt="Наушники TWS" class="product-image">
+                    <div class="product-info">
+                        <span class="product-badge">-30%</span>
+                        <h3 class="product-title">OnePlus Buds 3 Premium Sound</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="reviews">4.8 (5.2K)</span>
+                        </div>
+                        <div class="product-price">
+                            6 590 ₽ <span class="old-price">9 490 ₽</span>
+                        </div>
+                        <div class="product-meta">
+                            <span>📦 Доставка 7-14 дней</span>
+                            <span>✓ Гарантия</span>
+                        </div>
+                        <button class="buy-btn">🛒 В корзину</button>
+                    </div>
+                </div>
+
+                <!-- Товар 7 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=400&h=300&fit=crop" alt="Повербанк" class="product-image">
+                    <div class="product-info">
+                        <span class="product-badge">ТОП-100</span>
+                        <h3 class="product-title">Baseus Power Bank 20000mAh 65W</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="reviews">4.9 (15.7K)</span>
+                        </div>
+                        <div class="product-price">
+                            3 490 ₽ <span class="old-price">6 990 ₽</span>
+                        </div>
+                        <div class="product-meta">
+                            <span>📦 Доставка 5-10 дней</span>
+                            <span>✓ Гарантия</span>
+                        </div>
+                        <button class="buy-btn">🛒 В корзину</button>
+                    </div>
+                </div>
+
+                <!-- Товар 8 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400&h=300&fit=crop" alt="Realme смартфон" class="product-image">
+                    <div class="product-info">
+                        <span class="product-badge">БЕСТСЕЛЛЕР</span>
+                        <h3 class="product-title">Realme GT6 Pro 5G Snapdragon 8</h3>
+                        <div class="product-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="reviews">4.8 (12.3K)</span>
+                        </div>
+                        <div class="product-price">
+                            39 990 ₽ <span class="old-price">54 990 ₽</span>
+                        </div>
+                        <div class="product-meta">
+                            <span>📦 Доставка 10-20 дней</span>
+                            <span>✓ Гарантия</span>
+                        </div>
+                        <button class="buy-btn">🛒 В корзину</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>О компании</h3>
+                <ul>
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="#">Контакты</a></li>
+                    <li><a href="#">Вакансии</a></li>
+                    <li><a href="#">Пресс-центр</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Покупателям</h3>
+                <ul>
+                    <li><a href="#">Как сделать заказ</a></li>
+                    <li><a href="#">Оплата</a></li>
+                    <li><a href="#">Доставка</a></li>
+                    <li><a href="#">Возврат товара</a></li>
+                    <li><a href="#">Гарантия</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Сотрудничество</h3>
+                <ul>
+                    <li><a href="#">Партнёрская программа</a></li>
+                    <li><a href="#">Оптовым покупателям</a></li>
+                    <li><a href="#">Дропшиппинг</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Связаться с нами</h3>
+                <ul>
+                    <li>📧 info@toptovary.ru</li>
+                    <li>📱 8 (800) 555-35-35</li>
+                    <li>⏰ Пн-Пт: 9:00 - 18:00 МСК</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ТопТовары. Все права защищены.</p>
+            <p style="margin-top: 10px; font-size: 13px;">
+                Партнёрские ссылки. Мы получаем комиссию с покупок без дополнительной платы для вас.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function showCategory(category) {
+            // Обновление активной кнопки навигации
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Прокрутка к товарам
+            document.querySelector('.products-section').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    </script>
+</body>
+</html>
