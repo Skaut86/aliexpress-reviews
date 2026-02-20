@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ТопТовары — Лучшее с AliExpress</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --red: #ff3232;
+            --red-glow: rgba(255,50,50,0.35);
+            --dark: #0a0a0a;
+            --dark2: #111111;
+            --dark3: #1a1a1a;
+            --card: #161616;
+            --border: rgba(255,255,255,0.07);
+            --text: #f0f0f0;
+            --muted: #888;
+            --gold: #f5c542;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+
+        /* TOP BAR */
+        .top-bar {
+            background: var(--red);
+            text-align: center;
+            padding: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            animation: pulse-bar 2s infinite;
+        }
+
+        @keyframes pulse-bar {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.85; }
+        }
+
+        /* HEADER */
+        .header {
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            color: white;
+            text-decoration: none;
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: var(--red);
+        }
+
+        .search-wrap {
+            flex: 1;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-wrap input {
+            width: 100%;
+            padding: 14px 55px 14px 20px;
+            background: var(--dark3);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            color: white;
+            font-size: 15px;
+            font-family: 'Montserrat', sans-serif;
+            outline: none;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+
+        .search-wrap input:focus {
+            border-color: var(--red);
+            box-shadow: 0 0 20px var(--red-glow);
+        }
+
+        .search-wrap button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 42px;
+            background: var(--red);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .search-wrap button:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 20px var(--red-glow);
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .header-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            color: var(--muted);
+            transition: color 0.3s;
+            font-size: 12px;
+        }
+
+        .header-icon span:first-child {
+            font-size: 22px;
+        }
+
+        .header-icon:hover {
+            color: var(--red);
+        }
+
+        /* NAV */
+        .nav {
+            background: var(--dark2);
+            border-bottom: 1px solid var(--border);
+            padding: 0 40px;
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+        }
+
+        .nav-item {
+            padding: 16px 24px;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: white;
+            border-bottom-color: var(--red);
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 50%, #0a0a0a 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(255,50,50,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(255,50,50,0.08) 0%, transparent 50%);
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,50,50,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,50,50,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: var(--red);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(60px, 8vw, 110px);
+            line-height: 0.95;
+            letter-spacing: 2px;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 .red { color: var(--red); }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--muted);
+            max-width: 500px;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 16px 40px;
+            background: var(--red);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 30px var(--red-glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            padding: 16px 40px;
+            background: transparent;
+            color: white;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 50px;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat {
+            text-align: left;
+        }
+
+        .stat-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 42px;
+            color: white;
+            line-height: 1;
+            letter-spacing: 1px;
+        }
+
+        .stat-num span { color: var(--red); }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        /* CATEGORIES */
+        .section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 52px;
+            letter-spacing: 1px;
+            line-height: 1;
+        }
+
+        .section-title span { color: var(--red); }
+
+        .section-link {
+            color: var(--red);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s;
+        }
+
+        .section-link:hover { gap: 14px; }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+        }
+
+        .cat-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cat-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--red-glow), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .cat-card:hover {
+            border-color: var(--red);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .cat-card:hover::before { opacity: 1; }
+
+        .cat-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+            display: block;
+            position: relative;
+        }
+
+        .cat-name {
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            color: var(--text);
+        }
+
+        .cat-count {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 5px;
+        }
+
+        /* PROMO BANNERS */
+        .promo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px 80px;
+        }
+
+        .promo-card {
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .promo-card.red {
+            background: linear-gradient(135deg, #ff3232 0%, #8b0000 100%);
+        }
+
+        .promo-card.dark-blue {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 1px solid rgba(100,100,255,0.2);
+        }
+
+        .promo-card.gold {
+            background: linear-gradient(135deg, #2d1f00 0%, #1a1200 100%);
+            border: 1px solid rgba(245,197,66,0.3);
+        }
+
+        .promo-card::after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: -20px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .promo-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .promo-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            letter-spacing: 1px;
+            line-height: 1.1;
+            margin: 8px 0;
+        }
+
+        .promo-card.gold .promo-title { color: var(--gold); }
+
+        .promo-btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
+            align-self: flex-start;
+        }
+
+        .promo-btn:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        /* PRODUCTS */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .product-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            border-color: var(--red);
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 30px var(--red-glow);
+        }
+
+        .product-img-wrap {
+            position: relative;
+            overflow: hidden;
+            height: 260px;
+            background: var(--dark3);
+        }
+
+        .product-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-img-wrap img {
+            transform: scale(1.08);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--red);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .product-badge.gold {
+            background: var(--gold);
+            color: #000;
+        }
+
+        .wishlist-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 36px;
+            height: 36px;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .wishlist-btn:hover {
+            background: var(--red);
+            border-color: var(--red);
+        }
+
+        .wishlist-btn.active {
+            background: var(--red);
+            border-color: var(--red);
+        }
+
+        .product-discount {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: rgba(0,0,0,0.75);
+            color: #4cff91;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            backdrop-filter: blur(8px);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-weight: 700;
+            font-size: 15px;
+            color: white;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            height: 42px;
+            overflow: hidden;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .stars { color: var(--gold); font-size: 13px; }
+        .reviews { color: var(--muted); font-size: 12px; }
+
+        .product-price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            color: var(--red);
+            letter-spacing: 1px;
+            line-height: 1;
+        }
+
+        .product-price .old {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: var(--muted);
+            text-decoration: line-through;
+            margin-left: 10px;
+            font-weight: 400;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: var(--red);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.5px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .buy-btn:hover {
+            box-shadow: 0 10px 30px var(--red-glow);
+            background: #ff1a1a;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: var(--dark2);
+            border-top: 1px solid var(--border);
+            padding: 60px 40px 30px;
+            margin-top: 40px;
+        }
+
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand .logo {
+            font-size: 42px;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .footer-brand p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+            max-width: 280px;
+        }
+
+        .footer-col h4 {
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            padding: 8px 0;
+        }
+
+        .footer-col a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover {
+            color: var(--red);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #444;
+            font-size: 13px;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-content { animation: fadeUp 0.8s ease both; }
+        .hero-tag { animation: fadeUp 0.6s ease both; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .categories { grid-template-columns: repeat(3, 1fr); }
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 15px 20px; }
+            .section { padding: 50px 20px; }
+            .hero h1 { font-size: 60px; }
+            .categories { grid-template-columns: repeat(2, 1fr); }
+            .promo-grid { grid-template-columns: 1fr; padding: 0 20px 50px; }
+            .products-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .hero-stats { flex-direction: column; gap: 25px; }
+            .nav { padding: 0 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        🔥 ФЕВРАЛЬСКАЯ РАСПРОДАЖА — СКИДКИ ДО 70% НА ВСЕ КАТЕГОРИИ!
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+        <a href="#" class="logo">ТОП<span>ТОВАРЫ</span></a>
+
+        <div class="search-wrap">
+            <input type="text" id="searchInput" placeholder="Поиск лучших товаров с AliExpress..." oninput="applyFilters()">
+            <button onclick="applyFilters()">🔍</button>
+        </div>
+
+        <div class="header-icons">
+            <div class="header-icon" onclick="toggleWishlist()">
+                <span style="position:relative;">❤️<span id="wishlistCount" style="display:none;position:absolute;top:-8px;right:-10px;background:var(--red);color:white;font-size:10px;font-weight:700;border-radius:50%;width:18px;height:18px;line-height:18px;text-align:center;">0</span></span>
+                <span>Избранное</span>
+            </div>
+            <div class="header-icon" onclick="toggleCart()">
+                <span style="position:relative;">🛒<span id="cartCount" style="display:none;position:absolute;top:-8px;right:-10px;background:var(--red);color:white;font-size:10px;font-weight:700;border-radius:50%;width:18px;height:18px;line-height:18px;text-align:center;">0</span></span>
+                <span>Корзина</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="nav-item active" onclick="filterByCategory('all',this)">ВСЕ ТОВАРЫ</div>
+        <div class="nav-item" onclick="filterByCategory('electronics',this)">📱 ЭЛЕКТРОНИКА</div>
+        <div class="nav-item" onclick="filterByCategory('phones',this)">📞 ТЕЛЕФОНЫ</div>
+        <div class="nav-item" onclick="filterByCategory('computers',this)">💻 КОМПЬЮТЕРЫ</div>
+        <div class="nav-item" onclick="filterByCategory('home',this)">🏠 БЫТОВАЯ ТЕХНИКА</div>
+        <div class="nav-item" onclick="filterByCategory('clothes',this)">👕 ОДЕЖДА</div>
+        <div class="nav-item" onclick="filterByCategory('gaming',this)">🎮 ИГРЫ</div>
+        <div class="nav-item" style="color:#ff3232;" onclick="filterByCategory('sale',this)">🔥 АКЦИИ</div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <div class="hero-tag">🔥 ЛУЧШИЕ ТОВАРЫ 2026</div>
+            <h1>ЛУЧШЕЕ<br>С ALI<span class="red">EXPRESS</span></h1>
+            <p>Только проверенные товары. Только честные цены. Только реальные отзывы.</p>
+            <div class="hero-btns">
+                <a href="#products" class="btn-primary">Смотреть товары →</a>
+                <a href="#categories" class="btn-outline">Все категории</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-num">10<span>K+</span></div>
+                    <div class="stat-label">Товаров</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">50<span>K+</span></div>
+                    <div class="stat-label">Клиентов</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">4.9<span>★</span></div>
+                    <div class="stat-label">Рейтинг</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">70<span>%</span></div>
+                    <div class="stat-label">Макс. скидка</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <div class="section" id="categories">
+        <div class="section-header">
+            <div class="section-title">КАТЕГО<span>РИИ</span></div>
+            <a href="#" class="section-link">Все категории →</a>
+        </div>
+        <div class="categories">
+            <div class="cat-card" onclick="filterByCategory('electronics')">
+                <span class="cat-icon">📱</span>
+                <div class="cat-name">Электроника</div>
+                <div class="cat-count" id="count-electronics">0 товаров</div>
+            </div>
+            <div class="cat-card" onclick="filterByCategory('phones')">
+                <span class="cat-icon">📞</span>
+                <div class="cat-name">Телефоны</div>
+                <div class="cat-count" id="count-phones">0 товаров</div>
+            </div>
+            <div class="cat-card" onclick="filterByCategory('computers')">
+                <span class="cat-icon">💻</span>
+                <div class="cat-name">Компьютеры</div>
+                <div class="cat-count" id="count-computers">0 товаров</div>
+            </div>
+            <div class="cat-card" onclick="filterByCategory('home')">
+                <span class="cat-icon">🏠</span>
+                <div class="cat-name">Быт. техника</div>
+                <div class="cat-count" id="count-home">0 товаров</div>
+            </div>
+            <div class="cat-card" onclick="filterByCategory('clothes')">
+                <span class="cat-icon">👕</span>
+                <div class="cat-name">Одежда</div>
+                <div class="cat-count" id="count-clothes">0 товаров</div>
+            </div>
+            <div class="cat-card" onclick="filterByCategory('gaming')">
+                <span class="cat-icon">🎮</span>
+                <div class="cat-name">Игры</div>
+                <div class="cat-count" id="count-gaming">0 товаров</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROMO BANNERS -->
+    <div class="promo-grid">
+        <div class="promo-card red">
+            <div>
+                <div class="promo-label">Горячее предложение</div>
+                <div class="promo-title">СКИДКИ<br>ДО 70%</div>
+            </div>
+            <a href="#products" onclick="filterByCategory('sale')" class="promo-btn">Смотреть →</a>
+        </div>
+        <div class="promo-card dark-blue">
+            <div>
+                <div class="promo-label">Доставка</div>
+                <div class="promo-title">ОТ 7<br>ДНЕЙ</div>
+            </div>
+            <a href="https://aliexpress.ru" target="_blank" class="promo-btn">Подробнее →</a>
+        </div>
+        <div class="promo-card gold">
+            <div>
+                <div class="promo-label">Для новых</div>
+                <div class="promo-title" style="color:#f5c542;">КЕШБЭК<br>5%</div>
+            </div>
+            <a href="https://t.me/topalimarket" target="_blank" class="promo-btn">Получить →</a>
+        </div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="section" id="products">
+        <div class="section-header">
+            <div class="section-title">ХИТЫ <span>ПРОДАЖ</span></div>
+            <div style="display:flex;gap:10px;align-items:center;">
+                <select id="categoryFilter" onchange="applyFilters()" style="padding:10px;background:var(--card);border:1px solid var(--border);color:white;border-radius:8px;font-family:Montserrat;">
+                    <option value="all">Все категории</option>
+                    <option value="low">До 5000₽</option>
+                    <option value="mid">5000-20000₽</option>
+                    <option value="high">Выше 20000₽</option>
+                </select>
+                <select id="sortFilter" onchange="applyFilters()" style="padding:10px;background:var(--card);border:1px solid var(--border);color:white;border-radius:8px;font-family:Montserrat;">
+                    <option value="default">По умолчанию</option>
+                    <option value="price-asc">Дешевле →</option>
+                    <option value="price-desc">Дороже →</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="products-grid" id="productsGrid"></div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo">ТОП<span>ТОВАРЫ</span></a>
+                <p>Находим и проверяем лучшие товары с AliExpress, чтобы вы не тратили время на плохих продавцов и некачественные товары.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Компания</h4>
+                <ul>
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="#">Контакты</a></li>
+                    <li><a href="#">Вакансии</a></li>
+                    <li><a href="#">Блог</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Покупателям</h4>
+                <ul>
+                    <li><a href="#">Как заказать</a></li>
+                    <li><a href="#">Оплата</a></li>
+                    <li><a href="#">Доставка</a></li>
+                    <li><a href="#">Возврат</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Контакты</h4>
+                <ul>
+                    <li><a href="#">📧 <span class="__cf_email__" data-cfemail="97fef9f1f8d7e3f8e7e3f8e1f6e5eeb9e5e2">[email&#160;protected]</span></a></li>
+                    <li><a href="https://t.me/topalimarket" target="_blank">📱 Telegram канал</a></li>
+                    <li><a href="#">📸 Instagram</a></li>
+                    <li><a href="#">▶️ TikTok</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 ТопТовары. Все права защищены.</span>
+            <span>Партнёрские ссылки. Комиссия с покупок.</span>
+        </div>
+    </footer>
+
+
+    <!-- Плавающая кнопка Telegram -->
+    <a href="https://t.me/topalimarket" target="_blank" class="tg-float" title="Наш Telegram канал">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/>
+        </svg>
+        <span>Наш Telegram</span>
+    </a>
+
+    <style>
+        .tg-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #229ED9;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 8px 25px rgba(34,158,217,0.5);
+            z-index: 9999;
+            transition: all 0.3s;
+            animation: float-pulse 2s infinite;
+        }
+
+        .tg-float:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(34,158,217,0.6);
+        }
+
+        @keyframes float-pulse {
+            0%, 100% { box-shadow: 0 8px 25px rgba(34,158,217,0.5); }
+            50% { box-shadow: 0 8px 35px rgba(34,158,217,0.8); }
+        }
+
+        @media (max-width: 768px) {
+            .tg-float span { display: none; }
+            .tg-float { padding: 14px; border-radius: 50%; bottom: 20px; right: 20px; }
+        }
+    </style>
+
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const products=[
+{id:1,n:"TWS наушники с ANC",p:2490,o:4990,r:4.8,v:15000,cat:"electronics",i:"https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&h=300&fit=crop",b:"ХИТ",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fpopular%2F%25D0%25B1%25D0%25B5%25D1%2581%25D0%25BF%25D1%2580%25D0%25BE%25D0%25B2%25D0%25BE%25D0%25B4%25D0%25BD%25D1%258B%25D0%25B5-%25D0%25BD%25D0%25B0%25D1%2583%25D1%2588%25D0%25BD%25D0%25B8%25D0%25BA%25D0%25B8-tws.html"},
+{id:2,n:"Смарт-часы AMOLED",p:3490,o:6990,r:4.9,v:22000,cat:"electronics",i:"https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400&h=300&fit=crop",b:"-50%",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fpopular%2F%25D1%2581%25D0%25BC%25D0%25B0%25D1%2580%25D1%2582-%25D1%2587%25D0%25B0%25D1%2581%25D1%258B-%25D1%2581%25D0%25BE-%25D0%25B7%25D0%25B2%25D0%25BE%25D0%25BD%25D0%25BA%25D0%25BE%25D0%25BC.html"},
+{id:3,n:"Смартфон 8GB+256GB 5G",p:24990,o:39990,r:4.7,v:8500,cat:"phones",i:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",b:"5G",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F509%2Fsmartphones.html"},
+{id:4,n:"Power Bank 20000mAh",p:1990,o:3990,r:4.9,v:18000,cat:"electronics",i:"https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=400&h=300&fit=crop",b:"ТОП",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fpopular%2Fpower-bank-20000-mah.html"},
+{id:5,n:"Ноутбук 14'' 8GB SSD",p:29990,o:49990,r:4.6,v:5200,cat:"computers",i:"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=300&fit=crop",b:"РАБОТА",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F7%2Flaptops-networking.html"},
+{id:6,n:"Робот-пылесос",p:19990,o:34990,r:4.8,v:12000,cat:"home",i:"https://images.unsplash.com/photo-1558317374-067fb5f30001?w=400&h=300&fit=crop",b:"УМНЫЙ",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F6632%2Fvacuum-cleaners.html"},
+{id:7,n:"Bluetooth колонка",p:1490,o:3490,r:4.7,v:9800,cat:"electronics",i:"https://images.unsplash.com/photo-1606841837239-c5a1a4a07af7?w=400&h=300&fit=crop",b:"-60%",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F18%2Fspeaker.html"},
+{id:8,n:"Игровые наушники RGB",p:2990,o:5490,r:4.8,v:11000,cat:"gaming",i:"https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=300&fit=crop",b:"ГЕЙМЕР",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003508%2Fgaming-headsets.html"},
+{id:9,n:"Веб-камера Full HD",p:1790,o:3990,r:4.6,v:7200,cat:"computers",i:"https://images.unsplash.com/photo-1594122230689-45899d9e6f69?w=400&h=300&fit=crop",b:"NEW",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fpopular%2F%25D0%25B1%25D0%25B5%25D1%2581%25D0%25BF%25D1%2580%25D0%25BE%25D0%25B2%25D0%25BE%25D0%25B4%25D0%25BD%25D1%258B%25D0%25B5-%25D0%25BD%25D0%25B0%25D1%2583%25D1%2588%25D0%25BD%25D0%25B8%25D0%25BA%25D0%25B8-tws.html"},
+{id:10,n:"Умная лампа RGB",p:890,o:1990,r:4.7,v:12500,cat:"home",i:"https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=400&h=300&fit=crop",b:"ХИТ",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fpopular%2F%25D0%25B1%25D0%25B5%25D1%2581%25D0%25BF%25D1%2580%25D0%25BE%25D0%25B2%25D0%25BE%25D0%25B4%25D0%25BD%25D1%258B%25D0%25B5-%25D0%25BD%25D0%25B0%25D1%2583%25D1%2588%25D0%25BD%25D0%25B8%25D0%25BA%25D0%25B8-tws.html"},
+{id:11,n:"Клавиатура мех. RGB",p:3990,o:6990,r:4.8,v:8900,cat:"gaming",i:"https://images.unsplash.com/photo-1595225476474-87563907a212?w=400&h=300&fit=crop",b:"GAME",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fpopular%2F%25D0%25B1%25D0%25B5%25D1%2581%25D0%25BF%25D1%2580%25D0%25BE%25D0%25B2%25D0%25BE%25D0%25B4%25D0%25BD%25D1%258B%25D0%25B5-%25D0%25BD%25D0%25B0%25D1%2583%25D1%2588%25D0%25BD%25D0%25B8%25D0%25BA%25D0%25B8-tws.html"},
+{id:12,n:"Бюджетный смартфон",p:12990,o:19990,r:4.6,v:15200,cat:"phones",i:"https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400&h=300&fit=crop",b:"ЦЕНА",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F509%2Fsmartphones.html"},
+{id:13,n:"Флагман 12GB/512GB",p:44990,o:69990,r:4.9,v:5600,cat:"phones",i:"https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=400&h=300&fit=crop",b:"PRO",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F509%2Fsmartphones.html"},
+{id:14,n:"Игровой ноутбук RTX",p:69990,o:94990,r:4.7,v:3200,cat:"gaming",i:"https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400&h=300&fit=crop",b:"RTX",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F7%2Flaptops-networking.html"},
+{id:15,n:"Увлажнитель 4.5л",p:4990,o:7990,r:4.8,v:15200,cat:"home",i:"https://images.unsplash.com/photo-1585909695284-32d2985ac9c0?w=400&h=300&fit=crop",b:"ЗДР",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F6632%2Fvacuum-cleaners.html"},
+{id:16,n:"Очиститель воздуха",p:14990,o:22990,r:4.9,v:11800,cat:"home",i:"https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?w=400&h=300&fit=crop",b:"HEPA",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F6632%2Fvacuum-cleaners.html"},
+{id:17,n:"Мультиварка 6л",p:6990,o:11990,r:4.7,v:18500,cat:"home",i:"https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=300&fit=crop",b:"ХИТ",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F6632%2Fvacuum-cleaners.html"},
+{id:18,n:"Монитор 27'' 144Hz",p:19990,o:29990,r:4.8,v:9500,cat:"computers",i:"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=400&h=300&fit=crop",b:"144Hz",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F7%2Flaptops-networking.html"},
+{id:19,n:"Планшет 2-в-1",p:29990,o:39990,r:4.7,v:2800,cat:"computers",i:"https://images.unsplash.com/photo-1593642532400-2682810df593?w=400&h=300&fit=crop",b:"2в1",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F7%2Flaptops-networking.html"},
+{id:20,n:"Защищённый IP68",p:18990,o:29990,r:4.7,v:6800,cat:"phones",i:"https://images.unsplash.com/photo-1603891128711-11b4b03bb138?w=400&h=300&fit=crop",b:"IP68",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F509%2Fsmartphones.html"},
+{id:21,n:"Мужская куртка бомбер",p:3490,o:6990,r:4.7,v:9200,cat:"clothes",i:"https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=300&fit=crop",b:"ХИТ",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003655%2Fmen-clothing.html"},
+{id:22,n:"Женское платье летнее",p:1490,o:3490,r:4.8,v:14500,cat:"clothes",i:"https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=400&h=300&fit=crop",b:"-57%",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003710%2Fwomen-clothing.html"},
+{id:23,n:"Кроссовки беговые",p:2990,o:5490,r:4.9,v:21000,cat:"clothes",i:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop",b:"СПОРТ",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F100000343%2Fsneakers.html"},
+{id:24,n:"Джинсы slim fit",p:2190,o:4990,r:4.7,v:11800,cat:"clothes",i:"https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=300&fit=crop",b:"СТИЛЬ",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003655%2Fmen-clothing.html"},
+{id:25,n:"Спортивный костюм",p:2790,o:5990,r:4.8,v:16300,cat:"clothes",i:"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=300&fit=crop",b:"-53%",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003710%2Fwomen-clothing.html"},
+{id:26,n:"Зимние ботинки тёплые",p:3890,o:7490,r:4.8,v:8700,cat:"clothes",i:"https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=400&h=300&fit=crop",b:"ЗИМА",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F100000343%2Fsneakers.html"},
+{id:27,n:"Рюкзак городской 30л",p:1990,o:3990,r:4.9,v:19400,cat:"clothes",i:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=300&fit=crop",b:"ТОП",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003498%2Fbags.html"},
+{id:28,n:"Бейсболка унисекс",p:590,o:1490,r:4.7,v:22000,cat:"clothes",i:"https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=400&h=300&fit=crop",b:"-60%",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003655%2Fmen-clothing.html"},
+
+{id:29,n:"Фитнес-браслет IP67",p:1290,o:2990,r:4.7,v:18700,cat:"electronics",i:"https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=400&h=300&fit=crop",b:"-57%",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003498%2Fsmart-watches.html"},
+{id:30,n:"Портативный проектор",p:7990,o:14990,r:4.6,v:5400,cat:"electronics",i:"https://images.unsplash.com/photo-1601944179066-29786cb9d32a?w=400&h=300&fit=crop",b:"4K",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F18%2Fprojectors.html"},
+{id:31,n:"Электробритва 5D",p:3290,o:5990,r:4.8,v:12100,cat:"electronics",i:"https://images.unsplash.com/photo-1621607512022-6aecc4fed814?w=400&h=300&fit=crop",b:"NEW",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F6632%2Fshavers.html"},
+{id:32,n:"Зарядка 65W GaN",p:1590,o:3490,r:4.9,v:24000,cat:"electronics",i:"https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=400&h=300&fit=crop",b:"ТОП",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F18%2Fchargers.html"},
+{id:33,n:"Стабилизатор 3-ось",p:6490,o:11990,r:4.7,v:6800,cat:"electronics",i:"https://images.unsplash.com/photo-1617370679861-b3c7e5f4a1aa?w=400&h=300&fit=crop",b:"БЛОГЕР",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F18%2Fgimbals.html"},
+{id:34,n:"Наушники костная проводимость",p:3890,o:7490,r:4.6,v:9300,cat:"electronics",i:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",b:"СПОРТ",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F18%2Fheadphones.html"},
+{id:35,n:"Мини-камера 4K WiFi",p:2790,o:5490,r:4.7,v:11200,cat:"electronics",i:"https://images.unsplash.com/photo-1606986628253-3a2e3cf2b3cb?w=400&h=300&fit=crop",b:"4K",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F18%2Fip-cameras.html"},
+{id:36,n:"Электросамокат 350W",p:24990,o:39990,r:4.8,v:7600,cat:"electronics",i:"https://images.unsplash.com/photo-1604168041867-39c3e2d14e94?w=400&h=300&fit=crop",b:"ЭКО",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003498%2Felectric-scooters.html"},
+{id:37,n:"Портативная колонка IPX7",p:2190,o:4490,r:4.8,v:15500,cat:"electronics",i:"https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=300&fit=crop",b:"-51%",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F18%2Fspeaker.html"},
+{id:38,n:"LED лента 10м RGB",p:790,o:1990,r:4.7,v:31000,cat:"electronics",i:"https://images.unsplash.com/photo-1550985616-10810253b84d?w=400&h=300&fit=crop",b:"ХИТ",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F18%2Fled-strips.html"},
+
+{id:39,n:"Смартфон 6GB/128GB",p:9990,o:16990,r:4.6,v:19200,cat:"phones",i:"https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400&h=300&fit=crop",b:"-41%",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F509%2Fsmartphones.html"},
+{id:40,n:"Чехол MagSafe кожа",p:490,o:1290,r:4.8,v:28000,cat:"phones",i:"https://images.unsplash.com/photo-1601160854234-6f12553a3e1b?w=400&h=300&fit=crop",b:"MAG",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003498%2Fphone-cases.html"},
+{id:41,n:"Стекло защитное 9H",p:190,o:590,r:4.9,v:45000,cat:"phones",i:"https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=300&fit=crop",b:"9H",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003498%2Fscreen-protectors.html"},
+{id:42,n:"Кабель USB-C 100W",p:390,o:990,r:4.8,v:37000,cat:"phones",i:"https://images.unsplash.com/photo-1625723044792-44de16ccb4e9?w=400&h=300&fit=crop",b:"100W",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F18%2Fusb-cables.html"},
+{id:43,n:"Беспроводная зарядка 15W",p:890,o:1990,r:4.7,v:22000,cat:"phones",i:"https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=400&h=300&fit=crop",b:"FAST",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F18%2Fwireless-chargers.html"},
+{id:44,n:"Смартфон игровой 144Hz",p:32990,o:49990,r:4.8,v:7100,cat:"phones",i:"https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=400&h=300&fit=crop",b:"GAME",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F509%2Fsmartphones.html"},
+{id:45,n:"Держатель телефона авто",p:590,o:1490,r:4.8,v:34000,cat:"phones",i:"https://images.unsplash.com/photo-1615526675159-e248773364aa?w=400&h=300&fit=crop",b:"MAG",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003498%2Fcar-holders.html"},
+{id:46,n:"Раскладной смартфон",p:59990,o:89990,r:4.7,v:3400,cat:"phones",i:"https://images.unsplash.com/photo-1610945264803-c22b62d2a7b3?w=400&h=300&fit=crop",b:"FOLD",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F509%2Fsmartphones.html"},
+{id:47,n:"TWS наушники к телефону",p:890,o:2490,r:4.6,v:16800,cat:"phones",i:"https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?w=400&h=300&fit=crop",b:"-64%",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fpopular%2F%25D0%25B1%25D0%25B5%25D1%2581%25D0%25BF%25D1%2580%25D0%25BE%25D0%25B2%25D0%25BE%25D0%25B4%25D0%25BD%25D1%258B%25D0%25B5-%25D0%25BD%25D0%25B0%25D1%2583%25D1%2588%25D0%25BD%25D0%25B8%25D0%25BA%25D0%25B8-tws.html"},
+{id:48,n:"Смартфон 200Мп камера",p:37990,o:55990,r:4.8,v:6200,cat:"phones",i:"https://images.unsplash.com/photo-1617997455403-41f333d44d5b?w=400&h=300&fit=crop",b:"200МП",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F509%2Fsmartphones.html"},
+
+{id:49,n:"SSD 1TB NVMe M.2",p:3990,o:6990,r:4.9,v:14200,cat:"computers",i:"https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=400&h=300&fit=crop",b:"FAST",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F7%2Fsolid-state-drives.html"},
+{id:50,n:"ОЗУ 16GB DDR5",p:4990,o:8990,r:4.8,v:8900,cat:"computers",i:"https://images.unsplash.com/photo-1562976540-1502c2145851?w=400&h=300&fit=crop",b:"DDR5",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F7%2Fram.html"},
+{id:51,n:"Мышь игровая 25600dpi",p:1990,o:3990,r:4.8,v:17600,cat:"computers",i:"https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=300&fit=crop",b:"PRO",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003498%2Fgaming-mice.html"},
+{id:52,n:"Коврик XL 900x400мм",p:890,o:1990,r:4.9,v:29000,cat:"computers",i:"https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?w=400&h=300&fit=crop",b:"XL",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003498%2Fmouse-pads.html"},
+{id:53,n:"Мини-ПК Intel N100",p:14990,o:22990,r:4.7,v:6700,cat:"computers",i:"https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=400&h=300&fit=crop",b:"МИНИ",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F7%2Fmini-pcs.html"},
+{id:54,n:"USB-хаб 7 портов",p:990,o:2490,r:4.7,v:21000,cat:"computers",i:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",b:"USB3",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F7%2Fusb-hubs.html"},
+{id:55,n:"Монитор 32'' 4K IPS",p:34990,o:54990,r:4.8,v:4800,cat:"computers",i:"https://images.unsplash.com/photo-1547119957-637f8679db1e?w=400&h=300&fit=crop",b:"4K",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F7%2Flaptops-networking.html"},
+{id:56,n:"Подставка для ноутбука",p:1290,o:2990,r:4.8,v:25000,cat:"computers",i:"https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=400&h=300&fit=crop",b:"ХИТ",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F7%2Flaptop-stands.html"},
+{id:57,n:"Кулер для ноутбука RGB",p:1490,o:2990,r:4.6,v:13400,cat:"computers",i:"https://images.unsplash.com/photo-1587202372583-49330a15584d?w=400&h=300&fit=crop",b:"RGB",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F7%2Flaptop-coolers.html"},
+{id:58,n:"Карта захвата 4K HDMI",p:2990,o:5990,r:4.7,v:8200,cat:"computers",i:"https://images.unsplash.com/photo-1623039405147-547794f92e9e?w=400&h=300&fit=crop",b:"СТРИМ",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F7%2Fcapture-cards.html"},
+
+{id:59,n:"Электрочайник 1.7л",p:1990,o:3990,r:4.8,v:21000,cat:"home",i:"https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=400&h=300&fit=crop",b:"ТОП",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F6632%2Fkettles.html"},
+{id:60,n:"Аэрофритюрница 5л",p:5990,o:9990,r:4.9,v:18700,cat:"home",i:"https://images.unsplash.com/photo-1648377942884-5b6a63f6e78b?w=400&h=300&fit=crop",b:"-40%",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F6632%2Fair-fryers.html"},
+{id:61,n:"Кофемашина капсульная",p:8990,o:14990,r:4.8,v:11200,cat:"home",i:"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop",b:"КОФЕ",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F6632%2Fcoffee-makers.html"},
+{id:62,n:"Паровая швабра 1500W",p:3490,o:6990,r:4.7,v:9800,cat:"home",i:"https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400&h=300&fit=crop",b:"ПАРА",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F6632%2Fsteam-mops.html"},
+{id:63,n:"Миксер планетарный 5л",p:12990,o:19990,r:4.8,v:7400,cat:"home",i:"https://images.unsplash.com/photo-1608835291093-394b0c943a75?w=400&h=300&fit=crop",b:"PRO",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F6632%2Fstand-mixers.html"},
+{id:64,n:"Беспроводной пылесос",p:9990,o:17990,r:4.8,v:13600,cat:"home",i:"https://images.unsplash.com/photo-1558317374-067fb5f30001?w=400&h=300&fit=crop",b:"-44%",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F6632%2Fvacuum-cleaners.html"},
+{id:65,n:"Умная розетка WiFi",p:590,o:1490,r:4.7,v:34000,cat:"home",i:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",b:"SMART",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F6632%2Fsmart-plugs.html"},
+{id:66,n:"Блендер погружной 800W",p:1490,o:3490,r:4.6,v:16800,cat:"home",i:"https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=400&h=300&fit=crop",b:"800W",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F6632%2Fblenders.html"},
+{id:67,n:"Рисоварка 1.8л",p:2990,o:5490,r:4.8,v:22000,cat:"home",i:"https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=400&h=300&fit=crop",b:"ХИТ",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F6632%2Frice-cookers.html"},
+{id:68,n:"Утюг паровой 2400W",p:2490,o:4990,r:4.7,v:14500,cat:"home",i:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",b:"-50%",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F6632%2Firons.html"},
+
+{id:69,n:"Геймпад беспроводной",p:2490,o:4990,r:4.8,v:19400,cat:"gaming",i:"https://images.unsplash.com/photo-1592840496694-26d035b52b48?w=400&h=300&fit=crop",b:"WIRELESS",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003508%2Fgamepads.html"},
+{id:70,n:"Игровое кресло RGB",p:14990,o:24990,r:4.7,v:8600,cat:"gaming",i:"https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=400&h=300&fit=crop",b:"RGB",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003508%2Fgaming-chairs.html"},
+{id:71,n:"Мышь 32000dpi беспровод",p:3490,o:6990,r:4.9,v:12800,cat:"gaming",i:"https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=300&fit=crop",b:"PRO",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003498%2Fgaming-mice.html"},
+{id:72,n:"Микрофон USB конденсатор",p:3990,o:7490,r:4.8,v:9700,cat:"gaming",i:"https://images.unsplash.com/photo-1590602846989-e99596d2a6cc?w=400&h=300&fit=crop",b:"СТРИМ",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F18%2Fmicrophones.html"},
+{id:73,n:"Руль + педали PC/PS",p:8990,o:15990,r:4.7,v:5200,cat:"gaming",i:"https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=400&h=300&fit=crop",b:"ГОНКИ",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003508%2Fsteering-wheels.html"},
+{id:74,n:"Карта памяти 256GB UHS",p:1490,o:2990,r:4.8,v:27000,cat:"gaming",i:"https://images.unsplash.com/photo-1591488320449-011701bb6704?w=400&h=300&fit=crop",b:"256GB",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003498%2Fmemory-cards.html"},
+{id:75,n:"VR гарнитура автономная",p:19990,o:34990,r:4.6,v:4100,cat:"gaming",i:"https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=400&h=300&fit=crop",b:"VR",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003508%2Fvr-headsets.html"},
+{id:76,n:"Коврик с RGB подсветкой",p:1290,o:2990,r:4.7,v:18600,cat:"gaming",i:"https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?w=400&h=300&fit=crop",b:"RGB",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003498%2Fmouse-pads.html"},
+{id:77,n:"Стол игровой с LED",p:11990,o:19990,r:4.7,v:6300,cat:"gaming",i:"https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=400&h=300&fit=crop",b:"LED",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003508%2Fgaming-desks.html"},
+{id:78,n:"Охлаждение для телефона",p:790,o:1990,r:4.6,v:14900,cat:"gaming",i:"https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=300&fit=crop",b:"COOL",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003508%2Fphone-coolers.html"},
+
+{id:79,n:"Худи оверсайз унисекс",p:1990,o:4490,r:4.8,v:26000,cat:"clothes",i:"https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=400&h=300&fit=crop",b:"-56%",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003655%2Fhoodies.html"},
+{id:80,n:"Футболка хлопок Premium",p:790,o:1990,r:4.7,v:38000,cat:"clothes",i:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=300&fit=crop",b:"100%",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003655%2Ft-shirts.html"},
+{id:81,n:"Пуховик зимний -30°C",p:5490,o:9990,r:4.9,v:14200,cat:"clothes",i:"https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=400&h=300&fit=crop",b:"-30°",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003655%2Fdown-jackets.html"},
+{id:82,n:"Кеды кожаные белые",p:2290,o:4990,r:4.8,v:19700,cat:"clothes",i:"https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400&h=300&fit=crop",b:"КЛАСС",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F100000343%2Fsneakers.html"},
+{id:83,n:"Женская сумка кожа",p:2990,o:5990,r:4.8,v:11800,cat:"clothes",i:"https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&h=300&fit=crop",b:"NEW",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003498%2Fbags.html"},
+{id:84,n:"Ремень кожаный мужской",p:790,o:1990,r:4.7,v:17500,cat:"clothes",i:"https://images.unsplash.com/photo-1553532434-5ab5b6b84993?w=400&h=300&fit=crop",b:"ХИТ",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003655%2Fbelts.html"},
+{id:85,n:"Термобельё комплект",p:1490,o:3490,r:4.8,v:23600,cat:"clothes",i:"https://images.unsplash.com/photo-1611911813383-67769b37a149?w=400&h=300&fit=crop",b:"ТЕПЛО",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003655%2Fthermal-underwear.html"},
+{id:86,n:"Солнечные очки поляр.",p:990,o:2490,r:4.7,v:21000,cat:"clothes",i:"https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400&h=300&fit=crop",b:"-60%",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003498%2Fsunglasses.html"},
+{id:87,n:"Шарф вязаный кашемир",p:1290,o:2990,r:4.8,v:13400,cat:"clothes",i:"https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=400&h=300&fit=crop",b:"КАШЕМ",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003655%2Fscarves.html"},
+{id:88,n:"Спортивные леггинсы",p:1090,o:2490,r:4.9,v:31000,cat:"clothes",i:"https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=400&h=300&fit=crop",b:"ФИТНЕС",l:"https://rzekl.com/g/1e8d114494e52f543d5d16525dc3e8/?ulp=https%3A%2F%2Faliexpress.ru%2Fcategory%2F200003710%2Fleggings.html"}
+];
+
+function render(arr){
+const g=document.getElementById('productsGrid');
+if(arr.length===0){
+  g.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--muted);font-size:18px;">😔 Ничего не найдено</div>';
+  return;
+}
+g.innerHTML=arr.map(x=>{
+  const inWish=wishlist.has(x.id);
+  const inCart=cart.has(x.id);
+  const disc=Math.round((x.o-x.p)/x.o*100);
+  return `<div class="product-card">
+    <div class="product-img-wrap">
+      <img src="${x.i}" alt="${x.n}" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop'">
+      <div class="product-badge">${x.b}</div>
+      <div class="product-discount">-${disc}%</div>
+      <div class="wishlist-btn ${inWish?'active':''}" onclick="toggleItemWishlist(${x.id},this)" title="В избранное">${inWish?'❤️':'🤍'}</div>
+    </div>
+    <div class="product-info">
+      <div class="product-title">${x.n}</div>
+      <div class="product-rating"><span class="stars">⭐⭐⭐⭐⭐</span><span class="reviews">${x.r} · ${(x.v/1000).toFixed(1)}K отзывов</span></div>
+      <div class="product-price">${x.p.toLocaleString()} ₽ <span class="old">${x.o.toLocaleString()} ₽</span></div>
+      <div class="product-meta"><span>📦 7-14 дней</span><span>✓ Гарантия</span></div>
+      <div style="display:flex;gap:8px;margin-top:15px;">
+        <a href="${x.l}" class="buy-btn" target="_blank" style="flex:1;">🛒 Купить</a>
+        <button onclick="addToCart(${x.id})" style="padding:14px 14px;background:${inCart?'#333':'var(--dark3)'};border:1px solid ${inCart?'var(--red)':'var(--border)'};border-radius:12px;color:${inCart?'var(--red)':'var(--muted)'};cursor:pointer;font-size:18px;transition:all 0.3s;" title="В корзину">${inCart?'🛒':'＋'}</button>
+      </div>
+    </div>
+  </div>`;
+}).join('');
+}
+
+// Корзина и избранное
+const cart = new Set();
+const wishlist = new Set();
+
+function addToCart(id){
+  if(cart.has(id)) cart.delete(id); else cart.add(id);
+  updateCounters();
+  applyFilters();
+  showToast(cart.has(id)?'Добавлено в корзину 🛒':'Убрано из корзины');
+}
+
+function toggleItemWishlist(id, el){
+  if(wishlist.has(id)){ wishlist.delete(id); el.innerHTML='🤍'; el.classList.remove('active'); }
+  else { wishlist.add(id); el.innerHTML='❤️'; el.classList.add('active'); }
+  updateCounters();
+  showToast(wishlist.has(id)?'Добавлено в избранное ❤️':'Убрано из избранного');
+}
+
+function toggleWishlist(){
+  if(wishlist.size===0){ showToast('Избранное пусто — добавьте товары! ❤️'); return; }
+  activeCategory='all';
+  document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
+  document.querySelector('.nav-item').classList.add('active');
+  const f=products.filter(x=>wishlist.has(x.id));
+  document.getElementById('products').scrollIntoView({behavior:'smooth'});
+  document.getElementById('productsGrid').innerHTML='';
+  setTimeout(()=>render(f),300);
+}
+
+function toggleCart(){
+  if(cart.size===0){ showToast('Корзина пуста — добавьте товары! 🛒'); return; }
+  activeCategory='all';
+  const f=products.filter(x=>cart.has(x.id));
+  document.getElementById('products').scrollIntoView({behavior:'smooth'});
+  setTimeout(()=>render(f),300);
+}
+
+function updateCounters(){
+  const wc=document.getElementById('wishlistCount');
+  const cc=document.getElementById('cartCount');
+  wc.textContent=wishlist.size; wc.style.display=wishlist.size>0?'block':'none';
+  cc.textContent=cart.size; cc.style.display=cart.size>0?'block':'none';
+}
+
+function showToast(msg){
+  let t=document.getElementById('toast');
+  if(!t){ t=document.createElement('div'); t.id='toast'; t.style.cssText='position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#222;color:white;padding:12px 24px;border-radius:50px;font-size:14px;font-weight:600;z-index:99999;opacity:0;transition:opacity 0.3s;border:1px solid var(--border);'; document.body.appendChild(t); }
+  t.textContent=msg; t.style.opacity='1';
+  clearTimeout(t._timer);
+  t._timer=setTimeout(()=>t.style.opacity='0',2500);
+}
+
+// Счётчики категорий
+function updateCatCounts(){
+  ['electronics','phones','computers','home','clothes','gaming'].forEach(cat=>{
+    const el=document.getElementById('count-'+cat);
+    if(el) el.textContent=products.filter(x=>x.cat===cat).length+' товаров';
+  });
+}
+
+let activeCategory='all';
+
+function filterByCategory(cat, navEl){
+  activeCategory = cat;
+  document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('active'));
+  if(navEl) navEl.classList.add('active');
+  document.getElementById('searchInput').value='';
+  document.getElementById('products').scrollIntoView({behavior:'smooth'});
+  applyFilters();
+}
+
+function applyFilters(){
+  let f=[...products];
+  const q=document.getElementById('searchInput').value.trim().toLowerCase();
+  const c=document.getElementById('categoryFilter').value;
+  const s=document.getElementById('sortFilter').value;
+  // Поиск
+  if(q) f=f.filter(x=>x.n.toLowerCase().includes(q));
+  // Категория
+  if(activeCategory==='sale') f=f.filter(x=>(x.o-x.p)/x.o>=0.4);
+  else if(activeCategory!=='all') f=f.filter(x=>x.cat===activeCategory);
+  // Цена
+  if(c==='low') f=f.filter(x=>x.p<5000);
+  if(c==='mid') f=f.filter(x=>x.p>=5000&&x.p<=20000);
+  if(c==='high') f=f.filter(x=>x.p>20000);
+  // Сортировка
+  if(s==='price-asc') f.sort((a,b)=>a.p-b.p);
+  if(s==='price-desc') f.sort((a,b)=>b.p-a.p);
+  render(f);
+}
+
+// Legacy stub to avoid errors if old code referenced it
+function applyFilters_old(){}
+
+updateCatCounts();
+render(products);
+</script>
+</body>
+</html>
